@@ -1,4 +1,4 @@
-# tuit
+# Tuit
 -Django
 -PostgreSQL
 -Admin Panel
