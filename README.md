@@ -1,15 +1,15 @@
 # Tuit
--Django
--PostgreSQL
--Admin Panel
+- Django
+- PostgreSQL
+- Admin Panel
 
-# admin
+# Admin
 
-username: admin
-password: 1234
+- username: admin
+- password: 1234
 
-#postgesql
+# PostgreSQL
 
-user: postgres
-password: 1234
-host: localhost
+- user: postgres
+- password: 1234
+- host: localhost
