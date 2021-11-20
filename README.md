@@ -1,1 +1,5 @@
-# Tuit-App
+# tuit
+-Django
+-PostgreSQL
+-Admin Panel
+
