@@ -1,8 +1,20 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 from django.shortcuts import render, get_object_or_404
 from .models import Post
 
+
 def post_list(request):
-    posts = Post.published.all()
+    posts_published = Post.published.all()
+    pages_list = Paginator(object_list=posts_published, per_page=3)
+    page = request.GET.get('page')
+    try:
+        posts = pages_list.page(page)
+    except PageNotAnInteger:
+        posts = pages_list.page(1)
+    except EmptyPage:
+        posts = pages_list.page(pages_list.num_pages)
+
     return render(request, 'tuit/post/list.html', {'posts': posts})
 
 
