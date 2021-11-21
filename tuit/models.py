@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Это наш manager model
+from django.urls import reverse
 from django.utils.timezone import now
 
 
@@ -32,3 +33,7 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absoluteurl(self):
+        return reverse('tuit:post_detail', args=[self.publish.year,
+                                                 self.publish.month, self.publish.day, self.slug])
