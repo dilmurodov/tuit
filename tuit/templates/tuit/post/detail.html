@@ -9,4 +9,7 @@
     Published {{ post.publish }} by {{ post.author }}
   </p>
   {{ post.body|linebreaks }}
-{% endblock %}
+  <p>
+    <a href="{% url 'tuit:post_share' post.id %}">Share this post</a>
+  </p>
+  {% endblock %}
