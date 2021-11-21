@@ -19,7 +19,7 @@
 - get_absolute_url(self):
   + return reverse('qaysi app: qandey nomdagi url', args=[qaysi parametrlardan foydalanamiz])
 
-# SMTP severi bilan ishlash
+# SMTP serveri bilan ishlash
 
 - open the file settings.py and write these:
 - EMAIL_HOST = smtp.gmail.com
