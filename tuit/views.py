@@ -1,8 +1,9 @@
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .forms import PochtaForma
+from .forms import PochtaForma, CommentsForm
 from django.shortcuts import render, get_object_or_404
-from .models import Post
+from .models import Post, Comments
+
 
 def post_list(request):
     posts_published = Post.published.all()
@@ -45,3 +46,28 @@ def pochtaga_junatish(request, post_id):
     else:
         forma = PochtaForma()
         return render(request, 'tuit/post/share.html', {'post': post, 'form': forma, 'sent':sent})
+
+def comment(request, year, month, day, slug):
+    post = get_object_or_404(Post, status='published', publish__year=year, publish__month=month, publish__day=day, slug=slug)
+    comments = post.post_comments.filter(active=True)
+    new_comment = None
+
+    if request.method == 'POST':
+        comment_form = CommentsForm(data=request.POST)
+        if comment_form.is_valid():
+            # kommentariya taratib olamiz ammo hali bazaga saqlameymiz
+            new_comment = comment_form.save(commit=False)
+            # kommentariyani postga boxlab olamiz
+            new_comment.post = post
+            #
+            new_comment.save()
+        else:
+            comment_form = CommentsForm()
+    return render(request, 'tuit/post/detail.html', {'post': post, 'comments': comments, 'new_comment': new_comment, 'comment_form': comment_form})
+
+
+
+
+
+
+
